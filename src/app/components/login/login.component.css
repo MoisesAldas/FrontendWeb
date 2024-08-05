@@ -222,7 +222,7 @@ label {
   font-size: 1.2rem; /* Tamaño de fuente más grande */
   padding: 10px 20px; /* Aumenta el padding para hacer el botón más grande */
   border-radius: 5px; /* Esquinas redondeadas */
-  background-color: #007bff; /* Color de fondo */
+  background-color: #4caf50 !important; /* Color de fondo */
   color: white; /* Color del texto */
   border: none; /* Sin borde */
   cursor: pointer; /* Cursor de mano para indicar que es clickeable */
