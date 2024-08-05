@@ -1,0 +1,46 @@
+btnpresion {
+  margin-top: 10px;
+}
+.contenedorde {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+  background-image: url("/fondologin.jpeg");
+  background-size: cover;
+  background-position: center;
+  animation: fade-in 2s ease-out;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #46a13a;
+  margin-bottom: 1.5rem;
+  animation: bounce 1s infinite;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    cursor: pointer;
+    animation: none;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+button{
+  margin-bottom: 80px;
+}

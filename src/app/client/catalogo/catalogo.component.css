@@ -1,0 +1,204 @@
+.table-resposive1 {
+  margin-left: 375px;
+}
+
+.game-card {
+  background-color: #ffffff; /* Tarjeta blanca */
+  border: 1px solid #cccccc; /* Borde gris claro */
+  border-radius: 10px; /* Esquinas redondeadas */
+  width: 250px; /* Ancho de la tarjeta */
+  margin: 20px; /* Margen entre tarjetas */
+  padding: 20px; /* Paddings dentro de la tarjeta */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  margin-bottom: 20px; /* Margen inferior entre tarjetas */
+}
+
+.game-card img {
+  width: 100%; /* Imagen ocupa todo el ancho */
+  height: 150px; /* Alto de la imagen */
+  object-fit: cover; /* Imagen se ajusta al tamaño */
+  border-radius: 10px 10px 0 0; /* Esquinas redondeadas */
+}
+
+.game-card h2 {
+  font-size: 18px; /* Tamaño del título */
+  font-weight: bold; /* Título en negrita */
+  margin-top: 10px; /* Margen superior */
+  color: #333333; /* Color del título */
+}
+
+.game-card p {
+  font-size: 14px; /* Tamaño del texto */
+  color: #666666; /* Color del texto */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.game-card button {
+  background-color: #34c759; /* Botón verde */
+  color: #ffffff; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Paddings del botón */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cursor de mano */
+  border-radius: 10px; /* Esquinas redondeadas */
+}
+
+.game-card button:hover {
+  background-color: #2e865f; /* Botón verde oscuro al pasar el mouse */
+}
+
+.contenedor {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 210px; /* Adjust this margin as needed for the sidebar */
+  margin-right: 20px;
+  padding: 20px;
+
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+.tableborder {
+  background-color: #4caf50 !important;
+}
+.botones {
+  background-color: #4caf50 !important;
+}
+.compra {
+  color: #4caf50 !important;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    margin-left: 0; /* Remove left margin for smaller screens */
+    margin-right: 0;
+  }
+}
+
+.home-page {
+  position: relative;
+  padding: 50px 0;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  max-width: 100%;
+  color: white; /* Asegúrate de que el texto sea visible sobre el fondo */
+}
+
+.home-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("1358420.png") no-repeat center center;
+  background-size: cover;
+  background-position: 70% 20%;
+
+  opacity: 0.6; /* Ajusta la opacidad según sea necesario */
+  z-index: -1; /* Asegura que la imagen de fondo esté detrás del contenido */
+}
+
+.home-content {
+  position: relative; /* Asegura que el contenido esté sobre la imagen */
+  z-index: 1; /* Coloca el contenido encima del pseudo-elemento */
+}
+
+.responsive-container {
+  overflow-x: auto;
+  margin-left: 180px;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 75px;
+  color: #ffffff; /* Blanco para un alto contraste */
+  margin-bottom: 20px;
+  font-family: "Jaro", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Añade sombra al texto */
+}
+
+header p {
+  font-size: 20px;
+  color: #ffffff; /* Blanco para el texto del párrafo */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Añade sombra al texto del párrafo */
+}
+.table-resposive1 {
+  margin-left: 300px;
+  width: calc(100% - 375px); /* Adjust width to account for sidebar */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.col-md-3 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px; /* Adjust based on your preference */
+  margin-bottom: 20px;
+}
+
+.game-card {
+  width: 100%;
+  max-width: 250px;
+  margin: 10px;
+}
+
+@media (max-width: 1200px) {
+  .table-resposive1 {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .col-md-3 {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-md-3 {
+    max-width: 100%;
+  }
+}
+
+/* videojuego-catalogo.component.css */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: #4a5568;
+}
+
+.card button {
+  background-color: #4299e1;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #3182ce;
+}

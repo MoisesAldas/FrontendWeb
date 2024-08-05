@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="home-page">
+  <div class="home-content">
+    <header class="responsive-container">
+      <h1>Bienvenidos a Game Galaxy</h1>
+      <p>
+        Tu tienda de videojuegos favorita. Encuentra los mejores títulos al
+        mejor precio.
+      </p>
+    </header>
+  </div>
+</div>
+
+<div class="ml-64 flex justify-center">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+    <div
+      *ngFor="let videojuego of videojuegos"
+      class="bg-white p-6 rounded-lg shadow-lg"
+    >
+      <div class="mb-4">
+        <h2 class="text-xl font-semibold text-center">
+          {{ videojuego.nombre }}
+        </h2>
+        <p class="text-gray-600 text-center">${{ videojuego.precio }}</p>
+      </div>
+      <div class="text-center">
+        <button
+          (click)="comprarVideojuego(videojuego)"
+          class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
+        >
+          Comprar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

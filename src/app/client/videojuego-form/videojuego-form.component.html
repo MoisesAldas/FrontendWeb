@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+
+<div class="container mx-auto mt-10 px-4">
+  <h2 class="text-center text-2xl font-semibold mb-6">Game Galaxy</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-gray-100 p-6 rounded-lg shadow-md max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="mb-4">
+      <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre Cliente:</label>
+      <input type="text" id="nombre" formControlName="nombre" pattern="^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]{3,50}$" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [ngClass]="{'border-red-500': form.get('nombre')?.touched && form.get('nombre')?.errors}">
+      <div *ngIf="form.get('nombre')?.errors && form.get('nombre')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="form.get('nombre')?.hasError('required')">Este es un campo requerido</small>
+        <small *ngIf="form.get('nombre')?.hasError('pattern')">Debe contener solo letras, entre 3 y 50 caracteres</small>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700">Correo:</label>
+      <input type="email" id="email" formControlName="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [ngClass]="{'border-red-500': form.get('email')?.touched && form.get('email')?.errors}">
+      <div *ngIf="form.get('email')?.errors && form.get('email')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="form.get('email')?.hasError('required')">Este es un campo requerido</small>
+        <small *ngIf="form.get('email')?.hasError('email')">Debe ser un email válido</small>
+        <small *ngIf="form.get('email')?.hasError('minlength')">Debe tener al menos 10 caracteres</small>
+        <small *ngIf="form.get('email')?.hasError('maxlength')">No puede tener más de 50 caracteres</small>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="cedula" class="block text-sm font-medium text-gray-700">Cédula:</label>
+      <input type="text" id="cedula" formControlName="cedula" maxlength="10" inputmode="numeric" pattern="[0-9]*" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [ngClass]="{'border-red-500': form.get('cedula')?.touched && form.get('cedula')?.errors}">
+      <div *ngIf="form.get('cedula')?.errors && form.get('cedula')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="form.get('cedula')?.hasError('required')">Este es un campo requerido</small>
+        <small *ngIf="form.get('cedula')?.hasError('invalidCedula')">Cédula ecuatoriana inválida</small>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono:</label>
+      <input type="tel" id="telefono" formControlName="telefono" maxlength="10" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [ngClass]="{'border-red-500': form.get('telefono')?.touched && form.get('telefono')?.errors}">
+      <div *ngIf="form.get('telefono')?.errors && form.get('telefono')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="form.get('telefono')?.hasError('required')">Este es un campo requerido</small>
+        <small *ngIf="form.get('telefono')?.hasError('pattern')">Debe contener exactamente 10 dígitos y solo números</small>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="videojuego" class="block text-sm font-medium text-gray-700">Videojuego:</label>
+      <select id="videojuego" formControlName="videojuego" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [ngClass]="{'border-red-500': form.get('videojuego')?.touched && form.get('videojuego')?.errors}">
+        <option *ngFor="let videojuego of videojuegos" [value]="videojuego.nombre">{{ videojuego.nombre }}</option>
+      </select>
+      <div *ngIf="form.get('videojuego')?.errors && form.get('videojuego')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="form.get('videojuego')?.hasError('required')">Este es un campo requerido</small>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="precio" class="block text-sm font-medium text-gray-700">Precio:</label>
+      <input type="number" id="precio" formControlName="precio" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-200 text-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="mb-4">
+      <label for="codigoDescuento" class="block text-sm font-medium text-gray-700">Código de Descuento:</label>
+      <input type="text" id="codigoDescuento" formControlName="codigoDescuento" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [ngClass]="{'border-red-500': form.get('codigoDescuento')?.touched && form.get('codigoDescuento')?.errors}">
+      <div *ngIf="form.get('codigoDescuento')?.errors && form.get('codigoDescuento')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="form.get('codigoDescuento')?.hasError('invalidCode')">Ese no es el código de descuento válido</small>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="subtotal" class="block text-sm font-medium text-gray-700">Subtotal:</label>
+      <input type="number" id="subtotal" formControlName="subtotal" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-200 text-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="mb-4">
+      <label for="total" class="block text-sm font-medium text-gray-700">Total:</label>
+      <input type="number" id="total" formControlName="total" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-200 text-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="col-span-2 mb-4">
+      <p class="text-sm font-medium text-gray-700">Términos y Condiciones:</p>
+      <re-captcha #captchaRef (resolved)="resolved($event)" siteKey="6LeytfYpAAAAAH0lvhZb5DGSj0UAxiRtLdq-4eWt"></re-captcha>
+      <div *ngIf="!captchaValid && form.get('captcha')?.touched" class="text-red-600 text-sm mt-2">
+        <small>Completa la reCAPTCHA!</small>
+      </div>
+    </div>
+
+    <div class="col-span-2">
+      <button type="submit" [disabled]="form.invalid || !captchaValid" class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">ENVIAR COMPRA</button>
+    </div>
+  </form>
+</div>

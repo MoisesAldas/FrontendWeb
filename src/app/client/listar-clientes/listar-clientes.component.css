@@ -1,0 +1,234 @@
+.contenedor {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 210px; /* Adjust this margin as needed for the sidebar */
+  margin-right: 20px;
+  padding: 20px;
+
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+.tableborder {
+  background-color: #4caf50 !important;
+}
+.botones {
+  background-color: #4caf50 !important;
+}
+.compra {
+  color: #4caf50 !important;
+}
+
+.landing-page {
+  position: relative;
+  padding: 50px 0;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  max-width: 100%;
+  color: white; /* Asegúrate de que el texto sea visible sobre el fondo */
+}
+
+.landing-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("1355153.png") no-repeat center center;
+  background-size: cover;
+  background-position: 10% 20%;
+  opacity: 0.8; /* Ajusta la opacidad según sea necesario */
+  z-index: -1; /* Asegura que la imagen de fondo esté detrás del contenido */
+}
+
+.landing-page-content {
+  position: relative; /* Asegura que el contenido esté sobre la imagen */
+  z-index: 1; /* Coloca el contenido encima del pseudo-elemento */
+}
+.table-responsive {
+  overflow-x: auto;
+  margin-left: 180px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    margin-left: 0; /* Remove left margin for smaller screens */
+    margin-right: 0;
+  }
+}
+
+/* Google Fonts Import Link */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #2c2c2c; /* Fondo gris oscuro */
+  color: #ffffff;
+  font-size: 16px; /* Tamaño de fuente principal */
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-left: 180px;
+  padding: 20px;
+}
+
+.table-responsive h2 {
+  text-align: center;
+  color: #112011;
+  margin-bottom: 20px;
+  font-size: 24px; /* Tamaño de fuente del título */
+}
+
+header h1 {
+  font-size: 75px;
+  color: #4caf50;
+  margin-bottom: 20px;
+  font-family: "Jaro", sans-serif;
+}
+
+header p {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+:host ::ng-deep .p-datatable {
+  width: 100%;
+  margin: 20px 0;
+  font-size: 14px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .p-datatable thead {
+  background-color: #4caf50;
+}
+
+:host ::ng-deep .p-datatable th {
+  background-color: #4caf50;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+:host ::ng-deep .p-datatable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+:host ::ng-deep .p-datatable tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+:host ::ng-deep .p-datatable tbody td {
+  padding: 10px 15px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable .foto {
+  width: 50px;
+  height: auto;
+  border-radius: 4px;
+}
+
+:host ::ng-deep .p-datatable .botones {
+  display: flex;
+  align-items: center;
+}
+
+:host ::ng-deep .p-datatable button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .p-datatable button.aceptar {
+  background-color: #4caf50;
+  color: white;
+  margin-right: 10px; /* Asegura que haya espacio entre los botones */
+}
+
+:host ::ng-deep .p-datatable button.aceptar:hover {
+  background-color: #45a049;
+}
+
+:host ::ng-deep .p-datatable button.denegar {
+  background-color: #f44336;
+  color: white;
+}
+
+:host ::ng-deep .p-datatable button.denegar:hover {
+  background-color: #e53935;
+}
+
+:host ::ng-deep .estado-aceptado {
+  color: green;
+  font-weight: bold;
+}
+
+:host ::ng-deep .estado-denegado {
+  color: red;
+  font-weight: bold;
+}
+
+.landing-page {
+  position: relative;
+  padding: 50px 0;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  max-width: 100%;
+  color: white; /* Asegúrate de que el texto sea visible sobre el fondo */
+}
+
+.landing-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("1355153.png") no-repeat center center;
+  background-size: cover;
+  background-position: 10% 20%;
+  opacity: 0.7; /* Reduce la opacidad para mejorar el contraste */
+  z-index: -1; /* Asegura que la imagen de fondo esté detrás del contenido */
+}
+
+.landing-page-content {
+  position: relative; /* Asegura que el contenido esté sobre la imagen */
+  z-index: 1; /* Coloca el contenido encima del pseudo-elemento */
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-left: 180px;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 75px;
+  color: #ffffff; /* Blanco para un alto contraste */
+  margin-bottom: 20px;
+  font-family: "Jaro", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Añade sombra al texto */
+}
+
+header p {
+  font-size: 20px;
+  color: #ffffff; /* Blanco para el texto del párrafo */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Añade sombra al texto del párrafo */
+}

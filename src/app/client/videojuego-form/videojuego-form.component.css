@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+
+
+h1, h2 {
+  text-align: center;
+  font-family: "Jaro", sans-serif;
+  color: #333;
+}

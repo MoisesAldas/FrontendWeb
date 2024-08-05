@@ -1,0 +1,35 @@
+<div class="sidebar close">
+  <div class="logo-details">
+    <img src="/logo.png" alt="" width="100px" />
+    <span class="logo_name">GAME GALAXY</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a (click)="goToClientes()">
+        <i class="bx bx-user"></i>
+        <span class="link_name">Detalle Compra</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" (click)="goToClientes()">Clientes</a></li>
+      </ul>
+    </li>
+    <li>
+      <a (click)="goToTablafinal()">
+        <i class="bx bx-store"></i>
+        <span class="link_name">Fin de compra</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li>
+          <a class="link_name" (click)="goToTablafinal()">Fin de compra</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Logos de redes sociales -->
+  <div class="profile-details">
+    <button class="btn btn-logout bx bx-log-out cerrar" (click)="logout()">
+      Cerrar Sesión
+    </button>
+  </div>
+</div>

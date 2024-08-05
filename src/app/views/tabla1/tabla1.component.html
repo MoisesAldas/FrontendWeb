@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="landing-page">
+  <header class="table-responsive">
+    <h1>Bienvenidos a Game Galaxy</h1>
+    <p>
+      Tu tienda de videojuegos favorita. Encuentra los mejores títulos al mejor
+      precio.
+    </p>
+  </header>
+</div>
+
+<div class="table-responsive">
+  <h2>Detalle de Compra</h2>
+  <p-table [value]="datos" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Cliente</th>
+        <th>Correo</th>
+        <th>Videojuego</th>
+        <th>Precio</th>
+        <th>Total con descuento</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dato let-rowIndex="rowIndex">
+      <tr>
+        <td>{{ dato.Cliente }}</td>
+        <td>{{ dato.correo }}</td>
+        <td>{{ dato.videojuego }}</td>
+        <td>${{ dato.precio }}</td>
+        <td>${{ calcularTotal(dato.precio) }}</td>
+        <td
+          [ngClass]="{
+            'estado-aceptado': dato.estado === 'aceptado',
+            'estado-denegado': dato.estado === 'denegado'
+          }"
+        >
+          {{ dato.estado }}
+        </td>
+        <td>
+          <button
+            class="aceptar"
+            style="margin-right: 10px"
+            (click)="aceptarRegistro(rowIndex)"
+          >
+            Aceptar
+          </button>
+          <button class="denegar" (click)="denegarRegistro(rowIndex)">
+            Denegar
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
