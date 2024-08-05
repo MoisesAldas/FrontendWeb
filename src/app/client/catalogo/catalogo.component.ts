@@ -55,6 +55,6 @@ export class CatalogoComponent {
 
   comprarVideojuego(videojuego: any) {
     // Redirigir a otra página con el nombre del videojuego en la URL
-    this.router.navigate(['/videojuego-form', videojuego.nombre]);
+    
   }
 }
