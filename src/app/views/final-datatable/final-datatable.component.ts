@@ -74,12 +74,21 @@ export class FinalDatatableComponent {
 
   denegarCliente(cliente: any): void {
     const { cedula, email } = cliente;
+  
     this.registroService
-      .enviarCorreoJuegoDenegado(cedula, email, cliente)
+      .enviarCorreoDePruebaDenegado(cedula, email, cliente)
       .subscribe(
         (response) => {
-          cliente.estado = 'Rechazado';
-          Swal.fire('Éxito', response.msg, 'success');
+          // Delete the form after sending the email
+          this.registroService.deleteFormulario(cliente._id).subscribe(
+            () => {
+              Swal.fire('Cliente Notificado', 'Formulario eliminado y cliente notificado por correo.', 'success');
+            },
+            (error) => {
+              console.error('Error al eliminar el formulario:', error);
+              Swal.fire('Error', 'No se pudo eliminar el formulario', 'error');
+            }
+          );
         },
         (error) => {
           console.error('Error al enviar el correo:', error);

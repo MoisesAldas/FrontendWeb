@@ -92,17 +92,21 @@ export class VideojuegoFormComponent implements OnInit {
   actualizarTotal(): void {
     const precio = this.form.get('precio')?.value;
     let subtotal = precio;
-
+  
     if (this.descuentoActual) {
       subtotal *= (1 - this.descuentoActual.porcentaje / 100);
       this.form.get('codigoDescuento')?.setErrors(null); // Eliminar errores si el código es válido
     } else if (this.form.get('codigoDescuento')?.value) {
       this.form.get('codigoDescuento')?.setErrors({ invalidCode: true });
     }
-
-    this.form.get('subtotal')?.setValue(subtotal);
-    this.form.get('total')?.setValue(subtotal);
+  
+    // Redondear el subtotal a dos decimales
+    const subtotalRedondeado = parseFloat(subtotal.toFixed(2));
+    
+    this.form.get('subtotal')?.setValue(subtotalRedondeado);
+    this.form.get('total')?.setValue(subtotalRedondeado);
   }
+  
 
   validateEcuadorianCedula(control: AbstractControl): ValidationErrors | null {
     const cedula = control.value;
