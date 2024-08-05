@@ -3,6 +3,9 @@
     <div class="logo-container">
       <img src="/logo.png" alt="Logo de la Tienda" class="logo" />
     </div>
+    <button type="button" class="btn btn-secondary btn-client" (click)="loginAsClient()">
+      Ingresar como Cliente
+    </button>
     <h2 style="font-weight: bold">Iniciar Sesión</h2>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="form-group">
@@ -63,9 +66,7 @@
       <div *ngIf="loginFailed" class="alert alert-danger mt-3">
         Usuario o contraseña incorrectos.
       </div> <br><br>
-      <button type="button" class="btn btn-secondary btn-client" (click)="loginAsClient()">
-        Ingresar como Cliente
-      </button>
+      
     </form>
   </div>
 </div>
