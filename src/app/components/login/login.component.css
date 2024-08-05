@@ -211,3 +211,39 @@ label {
   }
 }
 
+.login-container {
+  position: relative;
+}
+
+.btn-client {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.2rem; /* Tamaño de fuente más grande */
+  padding: 10px 20px; /* Aumenta el padding para hacer el botón más grande */
+  border-radius: 5px; /* Esquinas redondeadas */
+  background-color: #007bff; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cursor de mano para indicar que es clickeable */
+  transition: background-color 0.3s; /* Transición suave al pasar el cursor */
+}
+
+.btn-client:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el cursor */
+}
+
+.login-box {
+  margin-top: 60px; /* Espacio superior para que no se sobreponga con el botón */
+}
+
+.logo-container {
+  text-align: center;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+}
+
+
