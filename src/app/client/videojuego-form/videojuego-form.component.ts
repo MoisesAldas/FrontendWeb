@@ -37,18 +37,16 @@ export class VideojuegoFormComponent implements OnInit {
       cedula: ['', [Validators.required, this.validateEcuadorianCedula]],
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       videojuego: ['', Validators.required],
-      idVideojuego: [''], // Campo oculto para el ID del videojuego
       precio: [{ value: '', disabled: true }, Validators.required],
       codigoDescuento: [''],
       subtotal: [{ value: '', disabled: true }, Validators.required],
       total: [{ value: '', disabled: true }, Validators.required],
-      juego:[''], 
       captcha: ['']
     });
   }
 
   ngOnInit(): void {
-    
+
     // Obtener videojuegos desde el servicio
     this.cargaritemsService.getAllVideojuegos().subscribe(data => {
       this.videojuegos = data;
@@ -63,9 +61,7 @@ export class VideojuegoFormComponent implements OnInit {
         const selectedVideojuego = this.videojuegos.find(v => v.nombre === value);
         const precio = selectedVideojuego ? selectedVideojuego.precio : 0;
         this.form.get('precio')?.setValue(precio);
-        
-        this.form.get('idVideojuego')?.setValue(selectedVideojuego ? selectedVideojuego._id : ''); // Guardar el ID del videojuego
-        
+
         this.actualizarTotal(); // Llamar a actualizarTotal al cambiar el videojuego
       }
     });
@@ -92,21 +88,21 @@ export class VideojuegoFormComponent implements OnInit {
   actualizarTotal(): void {
     const precio = this.form.get('precio')?.value;
     let subtotal = precio;
-  
+
     if (this.descuentoActual) {
       subtotal *= (1 - this.descuentoActual.porcentaje / 100);
       this.form.get('codigoDescuento')?.setErrors(null); // Eliminar errores si el código es válido
     } else if (this.form.get('codigoDescuento')?.value) {
       this.form.get('codigoDescuento')?.setErrors({ invalidCode: true });
     }
-  
+
     // Redondear el subtotal a dos decimales
     const subtotalRedondeado = parseFloat(subtotal.toFixed(2));
-    
+
     this.form.get('subtotal')?.setValue(subtotalRedondeado);
     this.form.get('total')?.setValue(subtotalRedondeado);
   }
-  
+
 
   validateEcuadorianCedula(control: AbstractControl): ValidationErrors | null {
     const cedula = control.value;
@@ -167,12 +163,18 @@ export class VideojuegoFormComponent implements OnInit {
       this.form.get('subtotal')?.enable();
       this.form.get('total')?.enable();
 
-      const formData = { ...this.form.value };
+      // Crear el objeto formData con los nombres de campo adecuados
+      const formData = {
+        ...this.form.value,
+        nombreVideojuego: this.form.get('videojuego')?.value, // Asignar el nombre del videojuego
+        juego: null, // Asignar null a juego
+        precio: this.form.get('precio')?.value,
+        subtotal: this.form.get('subtotal')?.value,
+        total: this.form.get('total')?.value
+      };
 
-      // Asegurarse de que el ID del videojuego y el código de descuento se envíen correctamente
-      formData.idVideojuego = this.form.get('idVideojuego')?.value;
-    
-      formData.codigoDescuento = this.form.get('codigoDescuento')?.value || null;
+      // Eliminar el campo `videojuego` que no se necesita en el backend
+      delete formData.videojuego;
 
       console.log("Datos Formulario", formData); // Verifica que los datos estén completos
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RegistroService {
-  private apiUrl = 'http://34.105.5.0:3001/api/formulario';
+  private apiUrl = 'http://localhost:3001/api/formulario';
 
   constructor(private http: HttpClient) {}
 
@@ -22,6 +22,7 @@ export class RegistroService {
 
   // Crear un nuevo formulario
   createFormulario(formulario: any): Observable<any> {
+    console.log("datos que se envian al formulario desde angular: ",formulario)
     return this.http.post(`${this.apiUrl}/`, formulario);
   }
 
