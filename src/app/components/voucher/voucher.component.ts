@@ -112,7 +112,7 @@ export class VoucherComponent implements OnInit {
       },
       error: () => {
         Swal.fire({
-          icon: 'error',
+          icon: 'success',
           title: 'Comprobante subido',
           text: 'Comprobante subido con éxito',
         });

@@ -14,6 +14,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { RegistroService } from '../../client/services/registro.service';
+
+
 @Component({
   selector: 'app-final-datatable',
   standalone: true,
@@ -28,10 +30,9 @@ import { RegistroService } from '../../client/services/registro.service';
     TableModule,
     InputTextModule,
     ButtonModule,
-
   ],
   templateUrl: './final-datatable.component.html',
-  styleUrls: ['./final-datatable.component.css']
+  styleUrls: ['./final-datatable.component.css'],
 })
 export class FinalDatatableComponent {
   clientes: any[] = [];
@@ -46,26 +47,31 @@ export class FinalDatatableComponent {
 
   ngOnInit(): void {
     this.obtenerClientes();
-    this.clientes = this.clientes.map(cliente => ({
+    this.clientes = this.clientes.map((cliente) => ({
       ...cliente,
-      imagenUrl: this.getImageUrl(cliente.imagenComprobante)
+      imagenUrl: this.getImageUrl(cliente.imagenComprobante),
     }));
-
   }
 
   getImageUrl(base64String: string): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + base64String);
+    return this.sanitizer.bypassSecurityTrustUrl(
+      'data:image/jpeg;base64,' + base64String
+    );
   }
   obtenerClientes(): void {
     this.registroService.getAllFormularios().subscribe(
       (data) => {
         // Filtrar clientes que tienen un comprobante
         this.clientes = data
-          .filter((cliente: any) => cliente.imagenComprobante !== null && cliente.imagenComprobante !== '')
+          .filter(
+            (cliente: any) =>
+              cliente.imagenComprobante !== null &&
+              cliente.imagenComprobante !== ''
+          )
           .map((cliente: any) => ({
             ...cliente,
 
-            imagenUrl: this.getImageUrl(cliente.imagenComprobante)
+            imagenUrl: this.getImageUrl(cliente.imagenComprobante),
           }));
       },
       (error) => {
@@ -76,27 +82,26 @@ export class FinalDatatableComponent {
 
   denegarCliente(cliente: any): void {
     const { cedula, email } = cliente;
-
-    this.registroService
-      .enviarCorreoDePruebaDenegado(cedula, email, cliente)
-      .subscribe(
-        (response) => {
-          // Delete the form after sending the email
-          this.registroService.deleteFormulario(cliente._id).subscribe(
-            () => {
-              Swal.fire('Cliente Notificado', 'Formulario eliminado y cliente notificado por correo.', 'success');
+    this.registroService.enviarCorreoAceptado(cedula, email, cliente).subscribe(
+      (response) => {
+        this.registroService
+          .updateFormulario(cliente._id, { estado: 'Denegado' })
+          .subscribe(
+            (updatedCliente) => {
+              cliente.estado = updatedCliente.estado; // Asegúrate de que el cliente se actualiza con la respuesta
+              Swal.fire('Éxito', response.msg, 'success');
             },
             (error) => {
-              console.error('Error al eliminar el formulario:', error);
-              Swal.fire('Error', 'No se pudo eliminar el formulario', 'error');
+              console.error('Error con el comprobante:', error);
+              Swal.fire('Éxito', response.msg, 'success');
             }
           );
-        },
-        (error) => {
-          console.error('Error al enviar el correo:', error);
-          Swal.fire('Error', 'No se pudo enviar el correo', 'error');
-        }
-      );
+      },
+      (error) => {
+        console.error('Error al enviar el correo:', error);
+        Swal.fire('Éxito', 'success');
+      }
+    );
   }
 
   aceptarCliente(cliente: any): void {
@@ -125,5 +130,4 @@ export class FinalDatatableComponent {
     this.mostrarModal = false;
     this.imagenSeleccionada = null;
   }
-
 }
