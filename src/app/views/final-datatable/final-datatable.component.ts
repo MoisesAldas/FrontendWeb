@@ -85,7 +85,7 @@ export class FinalDatatableComponent {
     this.registroService.enviarCorreoAceptado(cedula, email, cliente).subscribe(
       (response) => {
         this.registroService
-          .updateFormulario(cliente._id, { estado: 'Denegado' })
+          .updateFormulario(cliente._id, { estado: 'pendiente' })
           .subscribe(
             (updatedCliente) => {
               cliente.estado = updatedCliente.estado; // Asegúrate de que el cliente se actualiza con la respuesta
