@@ -35,6 +35,8 @@ import { RegistroService } from '../../client/services/registro.service';
 })
 export class FinalDatatableComponent {
   clientes: any[] = [];
+  mostrarModal: boolean = false;
+  imagenSeleccionada: SafeUrl | null = null;
 
   constructor(
     private registroService: RegistroService,
@@ -62,7 +64,7 @@ export class FinalDatatableComponent {
           .filter((cliente: any) => cliente.imagenComprobante !== null && cliente.imagenComprobante !== '')
           .map((cliente: any) => ({
             ...cliente,
-            
+
             imagenUrl: this.getImageUrl(cliente.imagenComprobante)
           }));
       },
@@ -74,7 +76,7 @@ export class FinalDatatableComponent {
 
   denegarCliente(cliente: any): void {
     const { cedula, email } = cliente;
-  
+
     this.registroService
       .enviarCorreoDePruebaDenegado(cedula, email, cliente)
       .subscribe(
@@ -109,6 +111,19 @@ export class FinalDatatableComponent {
         Swal.fire('Error', 'No se pudo enviar el correo', 'error');
       }
     );
+  }
+
+  abrirModal(imagenUrl: SafeUrl): void {
+    this.imagenSeleccionada = imagenUrl;
+    this.mostrarModal = true;
+  }
+
+  cerrarModal(event?: MouseEvent): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.mostrarModal = false;
+    this.imagenSeleccionada = null;
   }
 
 }
