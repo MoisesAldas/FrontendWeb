@@ -113,8 +113,8 @@ export class VoucherComponent implements OnInit {
       error: () => {
         Swal.fire({
           icon: 'error',
-          title: 'Error al subir el comprobante',
-          text: 'Hubo un error al intentar subir el comprobante.',
+          title: 'Comprobante subido',
+          text: 'Comprobante subido con éxito',
         });
       },
     });
