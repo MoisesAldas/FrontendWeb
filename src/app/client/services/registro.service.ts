@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RegistroService {
-  private apiUrl = 'http://34.168.9.244:3001/api/formulario';
+  private apiUrl = 'http://34.105.5.0:3001/api/formulario';
 
   constructor(private http: HttpClient) {}
 

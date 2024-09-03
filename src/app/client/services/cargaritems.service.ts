@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CargaritemsService {
-  private apiUrl = 'http://34.168.9.244:3001/api/cargar'; // Cambia esta URL según sea necesario
+  private apiUrl = 'http://34.105.5.0:3001/api/cargar'; // Cambia esta URL según sea necesario
 
   constructor(private http: HttpClient) { }
 
