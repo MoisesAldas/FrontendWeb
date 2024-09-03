@@ -1,10 +1,11 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { VoucherService } from '../../services/voucher.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-voucher',
@@ -21,17 +22,48 @@ export class VoucherComponent implements OnInit {
 
   constructor(
     private voucherService: VoucherService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private imageCompress: NgxImageCompressService
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.cedula = params.get('cedula');
     });
   }
 
   onFileChange(event: any) {
-    this.file = event.target.files[0];
+    const file = event.target.files[0];
+
+    if (file.size > 50 * 1024 * 1024) { // Verificación de tamaño máximo de 50MB
+      Swal.fire({
+        icon: 'warning',
+        title: 'Imagen demasiado grande',
+        text: 'Elija una imagen de menor tamaño.',
+      });
+      return;
+    }
+
+    // Optimización de la imagen antes de enviarla (opcional)
+    const orientation = -1; // Usa la orientación original
+    this.imageCompress.compressFile(URL.createObjectURL(file), orientation, 50, 50).then(
+      (compressedImage) => {
+        // Convertir base64 a Blob
+        const imageBlob = this.base64ToBlob(compressedImage.split(',')[1], file.type);
+        // Convertir Blob a File
+        this.file = new File([imageBlob], file.name, { type: file.type });
+      }
+    );
+  }
+
+  base64ToBlob(base64: string, type: string): Blob {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: type });
   }
 
   onButtonClick() {
@@ -54,7 +86,7 @@ export class VoucherComponent implements OnInit {
     }
 
     this.voucherService.uploadVoucher(this.cedula, this.file).subscribe({
-      next: (response) => {
+      next: () => {
         Swal.fire({
           icon: 'success',
           title: 'Comprobante subido',
@@ -62,11 +94,11 @@ export class VoucherComponent implements OnInit {
         });
         this.open = false;
       },
-      error: (error) => {
+      error: () => {
         Swal.fire({
-          icon: 'success',
-          title: 'Comprobante subido',
-          text: 'Comprobante subido con éxito',
+          icon: 'error',
+          title: 'Error al subir el comprobante',
+          text: 'Hubo un error al intentar subir el comprobante.',
         });
       }
     });
