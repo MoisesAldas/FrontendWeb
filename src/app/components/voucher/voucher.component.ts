@@ -34,21 +34,21 @@ export class VoucherComponent implements OnInit {
 
   onFileChange(event: any) {
     const file = event.target.files[0];
-
+  
     if (file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-
+  
       reader.onload = () => {
         const base64 = reader.result as string;
-
+  
         // Obtener la orientación de la imagen (opcional)
         this.imageCompress
           .getOrientation(file)
           .then((orientation: DOC_ORIENTATION) => {
-            // Redimensionar imagen a 375x629 píxeles con calidad del 100%
+            // Procesar la imagen sin redimensionar
             this.imageCompress
-              .compressFile(base64, orientation, 100, 100, 380, 650)
+              .compressFile(base64, orientation, 100, 100) // Ajustar calidad si es necesario
               .then((compressedImage) => {
                 // Convertir base64 a Blob
                 const imageBlob = this.base64ToBlob(
@@ -63,15 +63,15 @@ export class VoucherComponent implements OnInit {
               .catch(() => {
                 Swal.fire({
                   icon: 'error',
-                  title: 'Error al redimensionar la imagen',
-                  text: 'Hubo un error al intentar redimensionar la imagen.',
+                  title: 'Error al procesar la imagen',
+                  text: 'Hubo un error al intentar procesar la imagen.',
                 });
               });
           });
       };
     }
   }
-
+  
   base64ToBlob(base64: string, type: string): Blob {
     const byteCharacters = atob(base64);
     const byteNumbers = new Array(byteCharacters.length);
@@ -81,7 +81,7 @@ export class VoucherComponent implements OnInit {
     const byteArray = new Uint8Array(byteNumbers);
     return new Blob([byteArray], { type: type });
   }
-
+  
   onButtonClick() {
     if (!this.file) {
       Swal.fire({
