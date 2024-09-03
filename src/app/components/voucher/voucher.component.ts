@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { VoucherService } from '../../services/voucher.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { NgxImageCompressService } from 'ngx-image-compress';
+import { NgxImageCompressService, DOC_ORIENTATION } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-voucher',
@@ -35,25 +35,41 @@ export class VoucherComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
 
-    if (file.size > 50 * 1024 * 1024) { // Verificación de tamaño máximo de 50MB
-      Swal.fire({
-        icon: 'warning',
-        title: 'Imagen demasiado grande',
-        text: 'Elija una imagen de menor tamaño.',
-      });
-      return;
-    }
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
 
-    // Optimización de la imagen antes de enviarla (opcional)
-    const orientation = -1; // Usa la orientación original
-    this.imageCompress.compressFile(URL.createObjectURL(file), orientation, 50, 50).then(
-      (compressedImage) => {
-        // Convertir base64 a Blob
-        const imageBlob = this.base64ToBlob(compressedImage.split(',')[1], file.type);
-        // Convertir Blob a File
-        this.file = new File([imageBlob], file.name, { type: file.type });
-      }
-    );
+      reader.onload = () => {
+        const base64 = reader.result as string;
+
+        // Obtener la orientación de la imagen (opcional)
+        this.imageCompress
+          .getOrientation(file)
+          .then((orientation: DOC_ORIENTATION) => {
+            // Redimensionar imagen a 375x629 píxeles con calidad del 100%
+            this.imageCompress
+              .compressFile(base64, orientation, 100, 100, 375, 629)
+              .then((compressedImage) => {
+                // Convertir base64 a Blob
+                const imageBlob = this.base64ToBlob(
+                  compressedImage.split(',')[1],
+                  file.type
+                );
+                // Convertir Blob a File
+                this.file = new File([imageBlob], file.name, {
+                  type: file.type,
+                });
+              })
+              .catch(() => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error al redimensionar la imagen',
+                  text: 'Hubo un error al intentar redimensionar la imagen.',
+                });
+              });
+          });
+      };
+    }
   }
 
   base64ToBlob(base64: string, type: string): Blob {
@@ -100,7 +116,7 @@ export class VoucherComponent implements OnInit {
           title: 'Error al subir el comprobante',
           text: 'Hubo un error al intentar subir el comprobante.',
         });
-      }
+      },
     });
   }
 }
