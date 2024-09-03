@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class VoucherService {
-  private apiUrl = 'http://34.168.9.244:4200/api'; // Asegúrate de que esta URL sea correcta
+  private apiUrl = 'http://34.168.9.244:3001/api'; // Asegúrate de que esta URL sea correcta
 
   constructor(private http: HttpClient) {}
 
