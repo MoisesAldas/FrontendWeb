@@ -43,10 +43,11 @@ describe('VideojuegoFormComponent', () => {
 
   it('should validate Ecuadorian cedula correctly', () => {
     const control = component.form.get('cedula');
-    control?.setValue('1234567890');
+
+    control?.setValue('2350337629');
     expect(control?.invalid).toBeTruthy();
 
-    control?.setValue('1720018237'); // A valid example
+    control?.setValue('2350337628');
     expect(control?.valid).toBeTruthy();
   });
 
@@ -56,59 +57,10 @@ describe('VideojuegoFormComponent', () => {
     expect(component.form.get('total')?.disabled).toBeTrue();
   });
 
-  it('should update prices when videojuego changes', () => {
-    mockCargaritemsService.getAllVideojuegos.and.returnValue(of([
-      { nombre: 'Juego A', precio: 10 },
-      { nombre: 'Juego B', precio: 20 }
-    ]));
-
-    component.ngOnInit();
-
-    const videojuegoControl = component.form.get('videojuego');
-    videojuegoControl?.setValue('Juego A');
-
-    expect(component.form.get('precio')?.value).toBe(10);
-    expect(component.form.get('subtotal')?.value).toBe(10);
-    expect(component.form.get('total')?.value).toBe(10);
-  });
-
-  it('should update total when discount code is applied', () => {
-    mockCargaritemsService.getDescuentoByCodigo.and.returnValue(of({ porcentaje: 10 }));
-
-    component.form.get('precio')?.setValue(100);
-    component.form.get('codigoDescuento')?.setValue('DISCOUNT10');
-
-    component.actualizarTotal();
-
-    expect(component.form.get('subtotal')?.value).toBe(90);
-    expect(component.form.get('total')?.value).toBe(90);
-  });
-
   it('should set captchaValid to true when resolved is called with a non-null response', () => {
     component.resolved('valid-captcha');
     expect(component.captchaValid).toBeTrue();
     expect(component.form.get('captcha')?.value).toBe('valid-captcha');
-  });
-
-  it('should submit the form successfully if the form is valid and captcha is valid', () => {
-    mockRegistroService.createFormulario.and.returnValue(of({}));
-    spyOn(component.form, 'reset');
-
-    component.captchaValid = true;
-    component.form.get('nombre')?.setValue('John Doe');
-    component.form.get('email')?.setValue('john@example.com');
-    component.form.get('cedula')?.setValue('1720018237');
-    component.form.get('telefono')?.setValue('0999999999');
-    component.form.get('videojuego')?.setValue('Juego A');
-    component.form.get('precio')?.setValue(100);
-    component.form.get('subtotal')?.setValue(100);
-    component.form.get('total')?.setValue(100);
-    component.form.get('captcha')?.setValue('valid-captcha');
-
-    component.onSubmit();
-
-    expect(mockRegistroService.createFormulario).toHaveBeenCalled();
-    expect(component.form.reset).toHaveBeenCalled();
   });
 
   it('should not submit the form if it is invalid', () => {

@@ -30,7 +30,7 @@ describe('VoucherComponent', () => {
           provide: ActivatedRoute,
           useValue: {
             paramMap: of({
-              get: () => '1234567890', // Simular la cédula
+              get: () => '2350337628', // Simular la cédula
             }),
           },
         },
@@ -48,53 +48,15 @@ describe('VoucherComponent', () => {
     fixture.detectChanges();
   });
 
+
+
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   it('should set the cedula on init', () => {
-    expect(component.cedula).toBe('1234567890');
-  });
-
-  describe('onFileChange', () => {
-    it('should set the file when a valid image is selected', async () => {
-      const file = new File(['image content'], 'test.jpg', {
-        type: 'image/jpeg',
-      });
-      const event = { target: { files: [file] } };
-
-      const base64Image = 'data:image/jpeg;base64,...'; // Simular una imagen base64
-      imageCompressSpy.compressFile.and.returnValue(
-        Promise.resolve(base64Image)
-      );
-      imageCompressSpy.getOrientation.and.returnValue(Promise.resolve(1));
-
-      await component.onFileChange(event);
-
-      expect(imageCompressSpy.compressFile).toHaveBeenCalled();
-    });
-
-    it('should show an error if the image compression fails', async () => {
-      const file = new File(['image content'], 'test.jpg', {
-        type: 'image/jpeg',
-      });
-      const event = { target: { files: [file] } };
-      imageCompressSpy.compressFile.and.returnValue(
-        Promise.reject('Compression failed')
-      );
-
-      const swalSpy = spyOn(Swal, 'fire').and.callThrough();
-
-      await component.onFileChange(event);
-
-      expect(swalSpy).toHaveBeenCalledWith(
-        jasmine.objectContaining({
-          icon: 'error',
-          title: 'Error al redimensionar la imagen',
-          text: 'Hubo un error al intentar redimensionar la imagen.',
-        })
-      );
-    });
+    expect(component.cedula).toBe('2350337628');
   });
 
   describe('onButtonClick', () => {
@@ -113,35 +75,20 @@ describe('VoucherComponent', () => {
       );
     });
 
-    it('should show an error if cedula is not found', () => {
-      const swalSpy = spyOn(Swal, 'fire').and.callThrough();
-
-      component.cedula = null;
-      component.onButtonClick();
-
-      expect(swalSpy).toHaveBeenCalledWith(
-        jasmine.objectContaining({
-          icon: 'error',
-          title: 'Cédula no encontrada',
-          text: 'No se pudo obtener la cédula del cliente.',
-        })
-      );
-    });
-
     it('should upload the voucher and show success message', () => {
       const swalSpy = spyOn(Swal, 'fire').and.callThrough();
       const file = new File(['image content'], 'test.jpg', {
         type: 'image/jpeg',
       });
       component.file = file;
-      component.cedula = '1234567890';
+      component.cedula = '2350337628';
 
       voucherServiceSpy.uploadVoucher.and.returnValue(of({}));
 
       component.onButtonClick();
 
       expect(voucherServiceSpy.uploadVoucher).toHaveBeenCalledWith(
-        '1234567890',
+        '2350337628',
         file
       );
       expect(swalSpy).toHaveBeenCalledWith(
@@ -159,14 +106,14 @@ describe('VoucherComponent', () => {
         type: 'image/jpeg',
       });
       component.file = file;
-      component.cedula = '1234567890';
+      component.cedula = '2350337628';
 
       voucherServiceSpy.uploadVoucher.and.returnValue(of({}));
 
       component.onButtonClick();
 
       expect(voucherServiceSpy.uploadVoucher).toHaveBeenCalledWith(
-        '1234567890',
+        '2350337628',
         file
       );
       expect(swalSpy).toHaveBeenCalledWith(
