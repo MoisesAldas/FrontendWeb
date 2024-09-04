@@ -48,7 +48,7 @@ export class VoucherComponent implements OnInit {
           .then((orientation: DOC_ORIENTATION) => {
             // Redimensionar imagen a 375x629 píxeles con calidad del 100%
             this.imageCompress
-            .compressFile(base64, orientation, 50, 50, 800, 800)
+            .compressFile(base64, orientation, 30, 30, 800, 800)
               .then((compressedImage) => {
                 // Convertir base64 a Blob
                 const imageBlob = this.base64ToBlob(

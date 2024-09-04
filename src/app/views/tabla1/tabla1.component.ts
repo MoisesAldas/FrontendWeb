@@ -77,6 +77,8 @@ export class Tabla1Component {
           title: 'Registro aceptado',
           text: 'El registro ha sido aceptado correctamente.',
           icon: 'success',
+        }).then(() => {
+          window.location.reload(); // Recarga la página automáticamente después de aceptar
         });
       }
     });
@@ -100,7 +102,7 @@ export class Tabla1Component {
           text: 'El registro ha sido denegado correctamente.',
           icon: 'error',
         }).then(() => {
-          window.location.reload(); // Recarga la página automáticamente
+          window.location.reload(); // Recarga la página automáticamente después de denegar
         });
       }
     });
