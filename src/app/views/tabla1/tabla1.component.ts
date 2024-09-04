@@ -99,6 +99,8 @@ export class Tabla1Component {
           title: 'Registro denegado',
           text: 'El registro ha sido denegado correctamente.',
           icon: 'error',
+        }).then(() => {
+          window.location.reload(); // Recarga la página automáticamente
         });
       }
     });
