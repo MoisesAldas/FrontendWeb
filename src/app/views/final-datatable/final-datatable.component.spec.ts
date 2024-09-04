@@ -8,10 +8,9 @@ describe('FinalDatatableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FinalDatatableComponent]
-    })
-    .compileComponents();
-    
+      imports: [FinalDatatableComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FinalDatatableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
