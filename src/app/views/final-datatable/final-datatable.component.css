@@ -11,6 +11,9 @@
 .tableborder {
   background-color: #4caf50 !important;
 }
+.botones1 {
+  background-color: red !important;
+}
 .botones {
   background-color: #4caf50 !important;
 }
@@ -276,3 +279,5 @@ header p {
   text-decoration: none;
   cursor: pointer;
 }
+
+

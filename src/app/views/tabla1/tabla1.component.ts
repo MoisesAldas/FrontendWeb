@@ -78,7 +78,6 @@ export class Tabla1Component {
           text: 'El registro ha sido aceptado correctamente.',
           icon: 'success',
         });
-        // No recarga la página, solo actualiza el estado en la tabla
       }
     });
   }
@@ -101,7 +100,7 @@ export class Tabla1Component {
           text: 'El registro ha sido denegado correctamente.',
           icon: 'error',
         });
-        // No recarga la página, solo actualiza el estado en la tabla
+
       }
     });
   }
